@@ -3,6 +3,8 @@
 ## Introduction
 This project is an email server application built with Flask that provides a RESTful API for handling email-related functionalities. The application includes user registration, login, inbox management, and message sending, with robust security and validation features.
 
+[](app.jpeg)
+
 ## Chapter 1: Project Overview
 The fake email server mimics basic email operations:
 - **User Authentication**: Register, login, and logout functionality with password hashing and validation.
