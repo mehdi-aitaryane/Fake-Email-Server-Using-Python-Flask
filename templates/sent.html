@@ -1,0 +1,60 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+   Sent 
+{% endblock %}
+
+{% block custom_head %}
+{% endblock %}
+
+{% block header_navigation %}
+    {{ super() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <i class="bi bi-envelope-arrow-up px-2" ></i>
+   Sent         
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container pt-1">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-primary mt-3">Sent</h1>
+        <a href="{{ url_for('send_message') }}" class="text-nowrap"><i style="font-size: 2em;" class="bi bi-envelope-arrow-up"></i></a>
+    </div>
+
+    <div class="table-responsive mb-5" style="max-height: 380px; min-height: 380px; overflow-y: auto;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Recipient</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in messages %}
+                <tr>
+                    <td><a href="{{ url_for('view_message', message_id=message.id) }}"><b>{{ message.subject }}</b></a></td>
+                    <td>{{ message.recipient.email }}</td>            
+                    <td>{{ message.date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+

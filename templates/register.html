@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Register 
+{% endblock %}
+
+{% block custom_head %}
+{% endblock %}
+
+{% block header_navigation %}
+    {{ super() }}
+{% endblock %}
+
+{% block breadcrumb %}
+   Register         
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<div class="container pt-1">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Register Form -->
+            <h1 class="text-primary mb-4">Register</h1>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.first_name.label(class="form-label") }}
+                    {{ form.first_name(class="form-control", required=False) }}
+                    {% for error in form.first_name.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.last_name.label(class="form-label") }}
+                    {{ form.last_name(class="form-control", required=False) }}
+                    {% for error in form.last_name.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label(class="form-label") }}
+                    {{ form.email(class="form-control", required=False) }}
+                    {% for error in form.email.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}                    
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control", required=False) }}
+                    {% for error in form.password.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a href="/login"><i class="bi bi-arrow-left"></i> Already have an account? Login</a>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="col-md-6 px-5 py-5 my-5">
+
+            <p class="text-justify">    
+                <b>Secure and Reliable Communication:</b> Fake Email Server provides a secure and reliable platform for sending and receiving emails. With advanced encryption techniques, your communications remain confidential and protected from unauthorized access.
+            </p>
+        
+            <p class="text-justify">
+                <b>Efficient Email Management:</b> Our platform offers efficient email management tools, allowing users to organize their inbox, filter messages, and set up custom folders for better organization. Stay organized and in control of your emails with Fake Email Server.
+            </p>    
+        
+            <p class="text-justify">
+                <b>User-Friendly Interface:</b> Fake Email Server features a user-friendly interface that makes it easy to navigate and use. Whether you're a novice or experienced user, our intuitive design ensures a seamless experience, enabling you to focus on your communication tasks without any hassle.
+            </p>
+                </div>
+    
+    </div>
+</div>
+
+{% endblock %}

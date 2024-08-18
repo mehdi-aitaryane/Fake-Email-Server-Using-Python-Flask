@@ -1,0 +1,201 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/static/css/bootstrap-icons.min.css" >
+    <link rel="stylesheet" href="/static/css/style.css" >
+
+    <!-- Your custom head tags here -->
+    {% block custom_head %}
+
+    {% endblock %}
+
+    <script src="/static/js/bootstrap.bundle.min.js" ></script>
+</head>
+
+<body class="m-md-5 px-md-5" >
+
+    {% block header_navigation %}
+
+    {% if not current_user.is_authenticated  %}
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-envelope text-white" ></i>
+                Fake Email Server
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/login' %}active{% endif %}" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/register' %}active{% endif %}"
+                            href="/register">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% endif %}
+
+    {% if current_user.is_authenticated  %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" style="vertical-align: middle;"  href="/">
+                <i class="bi bi-envelope text-white" ></i>
+                Fake Email Server
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+
+                    <hr class="d-block d-sm-none text-white" />
+
+                    <li class="d-block d-sm-none nav-item text-white-50 font-weight-bolder" style="  vertical-align: middle;">
+                        <i class="bi bi-envelope-at"></i>
+                        Services
+                    </li>
+
+                    <hr class="d-block d-sm-none text-white" />
+
+                    <li class="nav-item d-block d-sm-none ms-5" style="vertical-align: middle;">
+                        <a class="nav-link {% if request.path == '/inbox' %}active{% endif %}" href="/inbox">
+                            <i class="bi bi-envelope-arrow-down" ></i>
+                            Inbox Messages
+                        </a>
+                    </li>
+                    <li class="nav-item d-block d-sm-none ms-5" style="  vertical-align: middle;">
+                        <a class="nav-link {% if request.path == '/sent' %}active{% endif %}" href="/sent">
+                            <i class="bi bi-envelope-arrow-up"></i>
+                            Sent Messages
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item d-none d-lg-block ms-5" style="vertical-align: middle;">
+                        <a class="nav-link {% if request.path == '/inbox' %}active{% endif %}" href="/inbox">
+                            <i class="bi bi-envelope-arrow-down" ></i>
+                            Inbox
+                        </a>
+                    </li>
+                    <li class="nav-item d-none d-lg-block" style="  vertical-align: middle;">
+                        <a class="nav-link {% if request.path == '/sent' %}active{% endif %}" href="/sent">
+                            <i class="bi bi-envelope-arrow-up"></i>
+                            Sent
+                        </a>
+                    </li>
+
+
+                    <hr class="d-block d-sm-none text-white" />
+
+                    <li class="d-block d-sm-none nav-item text-white-50 font-weight-bolder" style="  vertical-align: middle;">
+                        <i class="bi bi-person-circle"></i>
+                        Profile
+                    </li>
+
+                    <hr class="d-block d-sm-none text-white" />
+
+                    <li class="nav-item d-block d-sm-none ms-5" style="  vertical-align: middle;">
+                        <a class="nav-link {% if request.path == '/change-info' %}active{% endif %}" href="/change-info">
+                            <i class="bi bi-person"></i>
+                            Change Info
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item d-block d-sm-none ms-5" style="  vertical-align: middle;">
+                        <a class="nav-link {% if request.path == '/change-password' %}active{% endif %}" href="/change-password">
+                            <i class="bi bi-key"></i>
+                            Change Password
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item d-block d-sm-none ms-5" style="  vertical-align: middle;">
+                        <a class="nav-link" href="/logout">
+                            <i class="bi bi-door-closed"></i>
+                            Logout
+                        </a>
+                    </li>
+
+                </ul>
+    
+                <ul class="navbar-nav ms-auto d-none d-sm-block">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="  vertical-align: middle;"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li style="  vertical-align: middle;">
+                                <a class="dropdown-item {% if request.path == '/change-info' %}active{% endif %}" href="/change-info">
+                                    <i class="bi bi-person"></i>
+                                    Change Info
+                                </a>
+                            </li>
+                            <li style="  vertical-align: middle;">
+                                <a class="dropdown-item {% if request.path == '/change-password' %}active{% endif %}" href="/change-password">
+                                    <i class="bi bi-key"></i>
+                                    Change Password
+                                </a>
+                            </li>
+                            <li style="  vertical-align: middle;" >
+                                <a class="dropdown-item" href="/logout">
+                                    <i class="bi bi-door-closed"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% endif %}
+    {% endblock %}
+
+
+
+
+
+    <!-- Your content here -->
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="bg-primary text-center text-white pt-3 pb-3" style="  vertical-align: middle;" >
+        <div class="container">
+                <i class="bi bi-c-circle"></i>
+                Fake Email Server {{ current_year }}
+        </div>
+    </footer>
+
+
+    <script>
+        // Get current year
+        var current_year = new Date().getFullYear();
+        // Inject current year into the template
+        document.querySelector('footer p:last-child').innerText += ` ${current_year}`;
+    </script>
+
+</body>
+
+</html>

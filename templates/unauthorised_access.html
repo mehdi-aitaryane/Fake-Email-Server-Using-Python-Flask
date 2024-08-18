@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+   401 Unauthorised Access 
+{% endblock %}
+
+{% block custom_head %}
+{% endblock %}
+
+{% block header_navigation %}
+    {{ super() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    Not Found         
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container" style="min-height: 500px; max-height: 500px; text-align: center;">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-primary mt-3 mb-3" style="font-size: 15em;">401</h1>
+            <h2 class="text-primary mt-3 mb-3" style="font-size: 4em;">Unauthorised Access</h2>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+

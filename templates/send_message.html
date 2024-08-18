@@ -1,0 +1,97 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+   Send Message 
+{% endblock %}
+
+{% block custom_head %}
+    <link href="/static/css/quill.snow.css" rel="stylesheet">
+    <script src="/static/js/quill.min.js"></script>
+{% endblock %}
+
+{% block header_navigation %}
+    {{ super() }}
+{% endblock %}
+
+{% block breadcrumb %}
+    Send Message         
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container pt-1">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Send Message Form -->
+            <h1 class="text-primary mb-4 mt-3">Send Message</h1>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-4">
+                    <label for="recipient_email" class="form-label">Recipient Email</label>
+                    {{ form.recipient_email(class="form-control", required=False, value=request.form.recipient_email) }}
+                    {% for error in form.recipient_email.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-4">
+                    <label for="subject" class="form-label">Subject</label>
+                    {{ form.subject(class="form-control", required=False, value=request.form.subject) }}
+                    {% for error in form.subject.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-5">
+                    <label for="body" class="form-label">Body</label>
+                    {{ form.body(class="text-danger", type="hidden", required=False, value=request.form.body) }}
+                    <div id="editor">
+                    </div>
+                    {% for error in form.body.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        ['clean']                                         // remove formatting button
+    ];
+
+    var quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: {
+                container: toolbarOptions
+            }
+        },
+    });
+
+    document.querySelector('form').addEventListener('submit', function () {
+        var editorContent = document.querySelector('.ql-editor').innerHTML;
+        document.getElementById('body').value = editorContent;
+    });
+
+
+
+
+    // Get current year
+    var current_year = new Date().getFullYear();
+    // Inject current year into the template
+    document.querySelector('footer p:last-child').innerText += ` ${current_year}`;
+
+
+</script>
+
+
+{% endblock %}
